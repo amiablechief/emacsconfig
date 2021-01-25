@@ -64,3 +64,53 @@
   :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0))
+
+(use-package ivy-rich
+  :ensure t
+  :after (ivy)
+  :init
+  (setq ivy-rich-path-style 'abbrev
+        ivy-virtual-abbreviate 'full)
+  :config (ivy-rich-mode 1))
+
+(use-package all-the-icons-ivy-rich
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-rich-setup))
+
+(use-package counsel
+  :bind(("M-x" . counsel-M-x)
+	("C-x b" . counsel-ibuffer)
+	("C-x C-f" . counsel-find-file)
+	:map minibuffer-local-map
+	("C-r" . 'counsel-minibuffer-history))
+  :config
+  (setq ivy-initial-inputs-alist nil)) ;; Dont start searches with ^
+
+(use-package helpful
+  ;;:ensure t  ;; Download package if (setq use-package-always-ensure t) isn't set globally
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))

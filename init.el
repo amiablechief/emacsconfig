@@ -11,7 +11,7 @@
 (setq visible-bell t)
 
 ;; Set a reasonable font and font size
-(set-face-attribute 'default nil :font "JetBrains Mono" :height 140)
+(set-face-attribute 'default nil :font "JetBrains Mono" :height 120)
 
 ;; Set a theme
 (load-theme 'wombat)
@@ -65,6 +65,8 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
+(use-package doom-themes)
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
@@ -93,7 +95,7 @@
   :config (ivy-rich-mode 1))
 
 (use-package all-the-icons-ivy-rich
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-rich-setup))
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-rich))
 
 (use-package counsel
   :bind(("M-x" . counsel-M-x)

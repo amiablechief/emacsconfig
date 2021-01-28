@@ -95,7 +95,7 @@
   :config (ivy-rich-mode 1))
 
 (use-package all-the-icons-ivy-rich
-  :init (add-hook 'after-init-hook 'all-the-icons-ivy-rich))
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-rich-setup))
 
 (use-package counsel
   :bind(("M-x" . counsel-M-x)
